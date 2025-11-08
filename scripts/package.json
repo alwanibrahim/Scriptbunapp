@@ -1,0 +1,17 @@
+{
+  "name": "scripts",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "^1.3.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "dotenv": "^17.2.3",
+    "enquirer": "^2.4.1",
+    "gradient-string": "^3.0.0",
+    "ora": "^9.0.0"
+  }
+}
