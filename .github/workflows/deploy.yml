@@ -1,4 +1,4 @@
-name: santai
+name: Deploy to VPS
 on: 
   push: 
     branches: 
@@ -8,14 +8,23 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Deploy to vps
-        uses: appleboy/ssh-action@v0.1.10
+
+      - name: Debug secret
+        run: |
+          echo "=== START DEBUG ==="
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | head -5
+          echo "=== END DEBUG ==="
+
+      - name: Deploy to VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.VPS_HOST}}
-          username: ${{ secrets.VPS_USER}}
-          key: ${{secrets.VPS_PRIVATE_KEY}}
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          debug: true
           script: |
-            cd ${{secrets.VPS_PATH}}
-            git pull
+            cd ${{ secrets.VPS_PATH }}
+            git pull origin main
