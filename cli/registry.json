@@ -1,0 +1,3 @@
+{
+  "gc": "git clone {{arg1}}"
+}
